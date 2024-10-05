@@ -85,6 +85,27 @@
                 font-size: 1em; /* Ukuran lebih kecil untuk judul lagu */
             }
         }
+
+        /* Tombol play di tengah */
+        #play-button {
+            font-size: 1.5em;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            border-radius: 50px;
+        }
+
+        /* Sembunyikan tombol setelah dipencet */
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -94,10 +115,11 @@
         <div class="overlay"></div>
         <p id="teks-lirik"></p>
         <p id="judul-lagu">Abeer Nehme - Bi Saraha</p> <!-- Judul lagu ditambahkan di sini -->
+        <button id="play-button">Play</button> <!-- Tombol play -->
     </div>
 
     <!-- Audio -->
-    <audio id="audio" src="bishara-ok.mp3" autoplay loop></audio>
+    <audio id="audio" src="bishara-ok.mp3" loop></audio>
 
     <script>
         // Array lirik dan delay
@@ -143,10 +165,18 @@
             }, totalDelay); // Tunggu sampai semua lirik selesai
         }
 
-        window.onload = function() {
-            // Memulai penampilan lirik
+        // Fungsi untuk memulai musik dan menampilkan lirik
+        document.getElementById("play-button").addEventListener("click", function() {
+            // Mulai audio
+            let audio = document.getElementById("audio");
+            audio.play();
+
+            // Mulai menampilkan lirik
             tampilkanLirik();
-        };
+
+            // Sembunyikan tombol play setelah dipencet
+            this.classList.add("hide");
+        });
     </script>
 
 </body>
