@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abeer Nehme - Bi Saraha</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Harmattan:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Mengatur elemen seluruh halaman */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+        }
+
+        /* Background gambar dan overlay gradasi */
+        .background {
+            background-image: url('auralita.jpg'); /* Ganti dengan URL gambar Anda */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end; /* Teks berada di bawah */
+            align-items: flex-end; /* Teks berada di bawah */
+            flex-direction: column;
+        }
+
+        /* Overlay gradasi dari hitam ke transparan */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Gradasi dari hitam ke transparan */
+            z-index: 1;
+        }
+
+        /* Gaya teks lirik di bagian bawah */
+        #teks-lirik {
+            font-family: "Harmattan", sans-serif;
+            font-size: 3em;
+            font-weight: 400;
+            color: white;
+            z-index: 2; /* Memastikan teks muncul di atas overlay */
+            position: relative;
+            direction: rtl; /* Untuk teks Arab */
+            text-align: center;
+            margin-right: 5%;
+            padding: 20px;
+            max-width: 90%;
+            word-wrap: break-word;
+            margin-bottom: 10px; /* Jarak dari bawah halaman */
+        }
+
+        /* Gaya untuk judul lagu */
+        #judul-lagu {
+            font-family: "Harmattan", sans-serif;
+            font-size: 2em;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8); /* Warna putih dengan transparansi */
+            z-index: 2;
+            position: relative;
+            text-align: center;
+            margin-right: 10%;
+            margin-bottom: 20px;
+        }
+
+        /* Responsif di perangkat mobile */
+        @media (max-width: 600px) {
+            #teks-lirik {
+                font-size: 1.5em; /* Ukuran font yang lebih kecil di layar kecil */
+            }
+
+            #judul-lagu {
+                font-size: 1em; /* Ukuran lebih kecil untuk judul lagu */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background dan Overlay -->
+    <div class="background">
+        <div class="overlay"></div>
+        <p id="teks-lirik"></p>
+        <p id="judul-lagu">Abeer Nehme - Bi Saraha</p> <!-- Judul lagu ditambahkan di sini -->
+    </div>
+
+    <!-- Audio -->
+    <audio id="audio" src="bishara-ok.mp3" autoplay loop></audio>
+
+    <script>
+        // Array lirik dan delay
+        let lirik = [
+            "بصراحة هيدي أوّل مَرّة بحب",
+            "بصراحة هيدي كذبة كل شب",
+            "بيقلّي إنّي الأحلى",
+            "والبنت اللي بيرتحلا",
+            "بيطلع كذّاب وما بْيِنحب",
+            "لا...",
+            "بس هوِ مَنّو متلن كلّن",
+            "لا… محّالي جروحي من محلّن",
+            "وعيّشني أحلى قصّة حب",
+            "تَركلي مطرح جوّا القلب",
+            "بِنص القلب",
+            "القلب... القلب... القلب... القلب... ",
+            "القلب... القلب... القلب... القلب... ",
+            ""
+        ];
+
+        let delay = [
+            1.5, 7, 8, 4, 4, 6, 2, 5, 7, 7, 5, 2, 2, 13
+        ];
+
+        function tampilkanLirik() {
+            let container = document.getElementById("teks-lirik");
+
+            // Inisialisasi waktu awal
+            let totalDelay = 0;
+
+            // Loop untuk menampilkan lirik dengan delay
+            lirik.forEach((line, index) => {
+                totalDelay += delay[index] * 1000; // Konversi delay menjadi milidetik
+
+                setTimeout(() => {
+                    container.innerHTML = line; // Tampilkan lirik
+                }, totalDelay);
+            });
+
+            // Menjalankan lirik secara looping setelah semua lirik selesai
+            setTimeout(() => {
+                tampilkanLirik(); // Panggil fungsi lagi untuk looping
+            }, totalDelay); // Tunggu sampai semua lirik selesai
+        }
+
+        window.onload = function() {
+            // Memulai penampilan lirik
+            tampilkanLirik();
+        };
+    </script>
+
+</body>
+</html>
